@@ -2,7 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
-
+from dotenv import load_dotenv
+import os
 import time
 
 
@@ -14,9 +15,12 @@ driver.get('https://www.linkedin.com/login')
 
 # Enter your LinkedIn credentials
 username = driver.find_element(By.ID, 'username')
-username.send_keys('XXX')  # Enter your username
+myUsername = os.getenv('LINKEDIN_USERNAME')
+username.send_keys(myUsername)  # Enter your username in a cred.venv file
+
 password = driver.find_element(By.ID, 'password')
-password.send_keys('YYY')  # Enter your password
+myPassword = os.getenv('LINKEDIN_PASSWORD')
+password.send_keys(myPassword)  # Enter your password in the same cred.venv file
 password.send_keys(Keys.RETURN)
 
 # Wait for login to complete
